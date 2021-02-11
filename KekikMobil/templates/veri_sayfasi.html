@@ -1,0 +1,57 @@
+{% extends "taban.html" %}
+{% block kekik_icerik %}
+
+<!-- Üst Menü -->
+<div class="header header-fixed header-logo-center">
+    <a href="#" class="header-title">@KekikAkademi</a>
+    <a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
+    <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+    <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+    <a href="#" data-toggle-theme class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
+</div>
+
+<div class="page-title-clear"></div>
+
+<!-- Alt Menü -->
+<div id="footer-bar" class="footer-bar-6">
+    <a href="/giris_yap"><i class="fa fa-layer-group"></i><span>Giriş Yap</span></a>
+    <a href="#"><i class="fa fa-file"></i><span>Kürek</span></a>
+    <a href="/" class="circle-nav"><i class="fa fa-home"></i><span>AnaSayfa</span></a>
+    <a href="/veri_sayfasi" class="active-nav" ><i class="fa fa-camera"></i><span>Tarak</span></a>
+    <a href="#" data-menu="menu-main"><i class="fa fa-bars"></i><span>Menü</span></a>
+</div>
+
+<!-- İçerik Alanı -->
+<div class="page-content">
+    <div class="row mb-0" id="veri">
+
+    </div>
+</div>
+
+<script>
+    // $(document).ready(function() {
+    $(function() {
+        window.setInterval(function(){
+            veriVer()
+        }, 1000)
+
+        function veriVer(){
+            $.ajax({
+                url: "/veri_takip",
+                type: "POST",
+                dataType: "json",
+                success: function(data){
+                    console.log(data)
+                    // $('#veri').replaceWith(data.veri)
+                    // $('#veri').html(data.veri)
+                    $('#veri').append('<div class="col pr-2 card card-style rounded-m mr-0 p-3 mb-3"><h4 class="pt-3">' + data.veri + '</h4></div><div class="w-100"</div>')
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            });
+        }
+    });
+</script>
+
+{% endblock %}
